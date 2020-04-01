@@ -8,7 +8,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $users = [[
-            'id'             => 1,
+            'id'             => 252,
             'name'           => 'Admin',
             'email'          => 'admin@admin.com',
             'password'       => '$2y$10$imU.Hdz7VauIT3LIMCMbsOXvaaTQg6luVqkhfkBcsUd.SJW2XSRKO',
