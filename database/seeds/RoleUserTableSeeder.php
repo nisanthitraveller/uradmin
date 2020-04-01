@@ -7,6 +7,6 @@ class RoleUserTableSeeder extends Seeder
 {
     public function run()
     {
-        User::findOrFail(252)->roles()->sync(1);
+        User::findOrFail(253)->roles()->sync(1);
     }
 }
