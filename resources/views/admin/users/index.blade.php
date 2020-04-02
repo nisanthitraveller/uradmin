@@ -29,7 +29,10 @@
                             {{ trans('global.user.fields.email') }}
                         </th>
                         <th>
-                            {{ trans('global.user.fields.email_verified_at') }}
+                            IP Address
+                        </th>
+                        <th>
+                            Location
                         </th>
                         <th>
                             {{ trans('global.user.fields.roles') }}
@@ -52,7 +55,17 @@
                                 {{ $user->email ?? '' }}
                             </td>
                             <td>
-                                {{ $user->email_verified_at ?? '' }}
+                                {{ $user->last_login_ip ?? '' }}
+                            </td>
+                            <td>
+                                <?php 
+                                $location = null;
+                                if(!empty($user->last_login_ip) && $user->last_login_ip != '127.0.0.1') {
+                                    $locationData = \Location::get($user->last_login_ip)->toArray();
+                                    $location = $locationData['cityName'] .', '. $locationData['regionName'] .', '. $locationData['countryCode'];
+                                }
+                                ?>
+                                {{$location}}
                             </td>
                             <td>
                                 @foreach($user->roles as $key => $item)
