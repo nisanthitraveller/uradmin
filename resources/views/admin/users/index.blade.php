@@ -16,7 +16,7 @@
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable">
+            <table class=" table table-bordered table-striped table-hover table-condensed datatable p-0">
                 <thead>
                     <tr>
                         <th width="10">
@@ -29,13 +29,19 @@
                             {{ trans('global.user.fields.email') }}
                         </th>
                         <th>
-                            IP Address
-                        </th>
-                        <th>
                             Location
                         </th>
                         <th>
-                            {{ trans('global.user.fields.roles') }}
+                            Company
+                        </th>
+                        <th>
+                            Details
+                        </th>
+                        <th>
+                            Signup
+                        </th>
+                        <th>
+                            Remarks
                         </th>
                         <th>
                             &nbsp;
@@ -55,39 +61,38 @@
                                 {{ $user->email ?? '' }}
                             </td>
                             <td>
-                                {{ $user->last_login_ip ?? '' }}
+                                <span data-toggle="tooltip" title="{{ $user->country ?? '' }}">{{ $user->city ?? '' }}</span>
                             </td>
                             <td>
-                                <?php 
-                                $location = null;
-                                if(!empty($user->last_login_ip) && $user->last_login_ip != '127.0.0.1') {
-                                    $locationData = \Location::get($user->last_login_ip)->toArray();
-                                    $location = $locationData['cityName'] .', '. $locationData['regionName'] .', '. $locationData['countryCode'];
-                                }
-                                ?>
-                                {{$location}}
+                                {{ $user->company ?? '' }}
                             </td>
                             <td>
-                                @foreach($user->roles as $key => $item)
-                                    <span class="badge badge-info">{{ $item->title }}</span>
-                                @endforeach
+                                <span data-toggle="tooltip" title="{{ $user->device ?? '' }}">{{ $user->browser ?? '' }}</span>
+                            </td>
+                            <td>
+                                {{ date('d.m.y', strtotime($user->created_at)) ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->remarks ?? '' }}
                             </td>
                             <td>
                                 @can('user_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.users.show', $user->id) }}">
-                                        {{ trans('global.view') }}
+                                    <a href="{{ route('admin.users.show', $user->id) }}">
+                                        <i class="fa fa-search"></i>
                                     </a>
                                 @endcan
                                 @can('user_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.users.edit', $user->id) }}">
-                                        {{ trans('global.edit') }}
+                                    <a href="{{ route('admin.users.edit', $user->id) }}">
+                                        <i class="fa fa-pencil"></i>
                                     </a>
                                 @endcan
                                 @can('user_delete')
                                     <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        <a href="javascript:;" onclick="$(this).parent().submit()">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
                                     </form>
                                 @endcan
                             </td>
@@ -134,7 +139,8 @@
   dtButtons.push(deleteButton)
 @endcan
 
-  $('.datatable:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  $('.datatable:not(.ajaxTable)').DataTable({ buttons: dtButtons });
+  $('[data-toggle="tooltip"]').tooltip();
 })
 
 </script>

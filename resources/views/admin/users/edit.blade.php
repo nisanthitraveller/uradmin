@@ -34,17 +34,29 @@
                     {{ trans('global.user.fields.email_helper') }}
                 </p>
             </div>
-            <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
-                <label for="password">{{ trans('global.user.fields.password') }}</label>
-                <input type="password" id="password" name="password" class="form-control">
-                @if($errors->has('password'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('password') }}
-                    </em>
-                @endif
-                <p class="helper-block">
-                    {{ trans('global.user.fields.password_helper') }}
-                </p>
+            <div class="form-group">
+                <label>City</label>
+                <input type="text" id="city" name="city" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Country</label>
+                <input type="text" id="country" name="country" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Company</label>
+                <input type="text" id="company" name="company" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Browser</label>
+                <input type="text" id="browser" name="browser" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Device</label>
+                <input type="text" id="device" name="device" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Remarks</label>
+                <textarea id="remarks" name="remarks" class="form-control"></textarea>
             </div>
             <div class="form-group {{ $errors->has('roles') ? 'has-error' : '' }}">
                 <label for="roles">{{ trans('global.user.fields.roles') }}*
