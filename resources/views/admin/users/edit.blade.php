@@ -35,6 +35,10 @@
                 </p>
             </div>
             <div class="form-group">
+                <label>Payment Status</label>
+                <input type="text" id="payment_status" name="payment_status" class="form-control">
+            </div>
+            <div class="form-group">
                 <label>City</label>
                 <input type="text" id="city" name="city" class="form-control">
             </div>
