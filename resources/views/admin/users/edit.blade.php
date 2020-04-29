@@ -36,31 +36,31 @@
             </div>
             <div class="form-group">
                 <label>Payment Status</label>
-                <input type="text" id="payment_status" name="payment_status" class="form-control">
+                <input type="text" id="payment_status" name="payment_status" class="form-control" value="{{ old('payment_status', isset($user) ? $user->payment_status : '') }}">
             </div>
             <div class="form-group">
                 <label>City</label>
-                <input type="text" id="city" name="city" class="form-control">
+                <input type="text" id="city" name="city" class="form-control" value="{{ old('city', isset($user) ? $user->city : '') }}">
             </div>
             <div class="form-group">
                 <label>Country</label>
-                <input type="text" id="country" name="country" class="form-control">
+                <input type="text" id="country" name="country" class="form-control" value="{{ old('country', isset($user) ? $user->country : '') }}">
             </div>
             <div class="form-group">
                 <label>Company</label>
-                <input type="text" id="company" name="company" class="form-control">
+                <input type="text" id="company" name="company" class="form-control" value="{{ old('company', isset($user) ? $user->company : '') }}">
             </div>
             <div class="form-group">
                 <label>Browser</label>
-                <input type="text" id="browser" name="browser" class="form-control">
+                <input type="text" id="browser" name="browser" class="form-control" value="{{ old('browser', isset($user) ? $user->browser : '') }}">
             </div>
             <div class="form-group">
                 <label>Device</label>
-                <input type="text" id="device" name="device" class="form-control">
+                <input type="text" id="device" name="device" class="form-control" value="{{ old('device', isset($user) ? $user->device : '') }}">
             </div>
             <div class="form-group">
                 <label>Remarks</label>
-                <textarea id="remarks" name="remarks" class="form-control"></textarea>
+                <textarea id="remarks" name="remarks" class="form-control">{{ old('remarks', isset($user) ? $user->remarks : '') }}</textarea>
             </div>
             <div class="form-group {{ $errors->has('roles') ? 'has-error' : '' }}">
                 <label for="roles">{{ trans('global.user.fields.roles') }}*
