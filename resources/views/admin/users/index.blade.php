@@ -78,7 +78,7 @@
                             <td>
                                 {{ $user->email ?? '' }}
                             </td>
-                            <td>
+                            <td data-sort="{{strtotime($user->created_at)}}">
                                 {{ date('d.m.y', strtotime($user->created_at)) ?? '' }}
                             </td>
                             <td>

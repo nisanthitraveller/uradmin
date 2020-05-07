@@ -42,6 +42,10 @@
                             <td>
                                 <?php
                                     $meeting = \Illuminate\Support\Facades\DB::table('meetings')->select('created_at')->where('team_id', '=', $team->id)->latest()->first();
+                                    $mydate = $team->created_at;
+                                    if(!empty($meeting)) {
+                                        $mydate = $meeting->created_at;
+                                    }
                                 ?>
                             </td>
                             <td>
@@ -60,12 +64,8 @@
                             <td>
                                 {{ date('d.m.y', strtotime($team->created_at)) ?? '' }}
                             </td>
-                            <td>
-                                @if(!empty($meeting))
-                                    {{ date('d.m.y', strtotime($meeting->created_at)) ?? '' }}
-                                @else
-                                    {{ date('d.m.y', strtotime($team->created_at)) ?? '' }}
-                                @endif
+                            <td data-sort="{{strtotime($mydate)}}">
+                                {{ date('d.m.y', strtotime($mydate)) ?? '' }}
                             </td>
                             <td>
                                 

@@ -41,7 +41,7 @@
                                     $teamDetails = $teamObj->where('id', $meeting->team_id)->with('members')->with('owner')->first(); 
                                 ?>
                             </td>
-                            <td>
+                            <td data-sort="{{strtotime($meeting->created_at)}}">
                                 {{ date('d.m.y', strtotime($meeting->created_at)) ?? '' }}
                             </td>
                             <td>
