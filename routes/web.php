@@ -27,6 +27,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::delete('teams/destroy', 'TeamController@massDestroy')->name('teams.massDestroy');
     Route::get('teams/members/{teamId}', 'TeamController@members')->name('teams.members');
+    Route::get('teams/vomeetings', 'TeamController@vomeetings')->name('teams.vomeetings');
+    Route::get('teams/meetings', 'TeamController@meetings')->name('teams.meetings');
     Route::resource('teams', 'TeamController');
     
 });

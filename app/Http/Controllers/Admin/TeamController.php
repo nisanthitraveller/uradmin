@@ -7,6 +7,7 @@ use App\Http\Requests\MassDestroyProductRequest;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Team;
+use Carbon\Carbon;
 
 class TeamController extends Controller
 {
@@ -14,7 +15,7 @@ class TeamController extends Controller
     {
         abort_unless(\Gate::allows('team_access'), 403);
 
-        $teams = Team::all();
+        $teams = Team::with('owner')->with('members')->get();
 
         return view('admin.teams.index', compact('teams'));
     }
@@ -79,5 +80,21 @@ class TeamController extends Controller
         $teamObj = new Team();
         $team = $teamObj->where('id', $teamId)->with('members')->first();
         return view('admin.teams.members', compact('team'));
+    }
+    
+    public function vomeetings()
+    {
+        abort_unless(\Gate::allows('team_access'), 403);
+
+        $meetings = \Illuminate\Support\Facades\DB::table('meetings')->where('team_id', '!=', 0)->where('type', 6)->orderBy('created_at', 'desc')->orderBy('team_id', 'asc')->get();
+        return view('admin.teams.vomeetings', compact('meetings'));
+    }
+    public function meetings()
+    {
+        abort_unless(\Gate::allows('team_access'), 403);
+
+        $meetings = \Illuminate\Support\Facades\DB::table('meetings')->where('team_id', '!=', 0)->where('type', 3)->orderBy('id', 'desc')->get();
+        
+        return view('admin.teams.vomeetings', compact('meetings'));
     }
 }

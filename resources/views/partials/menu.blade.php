@@ -44,13 +44,40 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item">
-                <a href="{{ route("admin.teams.index") }}" class="nav-link {{ request()->is('admin/teams') || request()->is('admin/teams/*') ? 'active' : '' }}">
-                    <i class="fas fa-teamspeak nav-icon">
+            <li class="nav-item nav-dropdown">
+                <a class="nav-link  nav-dropdown-toggle">
+                    <i class="fas fa-users nav-icon">
 
                     </i>
-                    {{ trans('global.team.title') }}
+                    Team management
                 </a>
+                
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a href="{{ route("admin.teams.index") }}" class="nav-link {{ request()->is('admin/teams') || request()->is('admin/teams/*') ? 'active' : '' }}">
+                            <i class="fas fa-teamspeak nav-icon">
+
+                            </i>
+                            {{ trans('global.team.title') }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route("admin.teams.vomeetings") }}" class="nav-link {{ request()->is('admin/teams/vomeetings') || request()->is('admin/teams/vomeetings/*') ? 'active' : '' }}">
+                            <i class="fas fa-unlock-alt nav-icon">
+
+                            </i>
+                            VO sessions
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route("admin.teams.vomeetings") }}" class="nav-link {{ request()->is('admin/teams/meetings') || request()->is('admin/teams/meetings/*') ? 'active' : '' }}">
+                            <i class="fas fa-unlock-alt nav-icon">
+
+                            </i>
+                            Meetings
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">

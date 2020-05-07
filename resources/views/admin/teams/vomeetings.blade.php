@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        {{ trans('global.team.title_singular') }} {{ trans('global.list') }}
+        VO list
     </div>
 
     <div class="card-body">
@@ -14,6 +14,9 @@
 
                         </th>
                         <th>
+                            Date
+                        </th>
+                        <th>
                             {{ trans('global.team.fields.team_name') }}
                         </th>
                         <th>
@@ -23,62 +26,41 @@
                             Email
                         </th>
                         <th>
-                            Members
-                        </th>
-                        <th>
-                            Created
-                        </th>
-                        <th>
-                            Login
-                        </th>
-                        <th>
-                            &nbsp;
+                            Duration
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($teams as $key => $team)
-                        <tr data-entry-id="{{ $team->id }}">
+                    <?php 
+                        $teamObj = new \App\Team();
+                    ?>
+                    @foreach($meetings as $key => $meeting)
+                        <tr data-entry-id="{{ $meeting->id }}">
                             <td>
-                                <?php
-                                    $meeting = \Illuminate\Support\Facades\DB::table('meetings')->select('created_at')->where('team_id', '=', $team->id)->latest()->first();
+                                <?php 
+                                    $teamDetails = $teamObj->where('id', $meeting->team_id)->with('members')->with('owner')->first(); 
                                 ?>
                             </td>
                             <td>
-                                {{ $team->team_name ?? '' }}
+                                {{ date('d.m.y', strtotime($meeting->created_at)) ?? '' }}
                             </td>
                             <td>
-                                {{ $team->owner->name ?? '' }}
+                                {{ $teamDetails->team_name ?? '' }}
                             </td>
                             <td>
-                                {{ $team->owner->email ?? '' }}
+                                {{ $teamDetails->owner->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $teamDetails->owner->email ?? '' }}
                             </td>
                             
                             <td>
-                                {{ count($team->members) ?? '' }}
-                            </td>
-                            <td>
-                                {{ date('d.m.y', strtotime($team->created_at)) ?? '' }}
-                            </td>
-                            <td>
-                                @if(!empty($meeting))
-                                    {{ date('d.m.y', strtotime($meeting->created_at)) ?? '' }}
-                                @else
-                                    No login
-                                @endif
-                            </td>
-                            <td>
-                                
-                                <a class="btn btn-xs btn-warning" href="{{ route('admin.teams.members', $team->id) }}">
-                                    {{ trans('global.members') }}
-                                </a>
-                                @can('team_delete')
-                                    <form action="{{ route('admin.teams.destroy', $team->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                    </form>
-                                @endcan
+                                <?php
+                                    $startTime = \Carbon\Carbon::parse($meeting->created_at);
+                                    $finishTime = \Carbon\Carbon::parse($meeting->updated_at);
+                                    $totalDuration = $finishTime->diffInSeconds($startTime);
+                                    echo gmdate('H:i', $totalDuration);
+                                ?>
                             </td>
 
                         </tr>

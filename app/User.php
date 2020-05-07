@@ -70,4 +70,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
+    
+    public function getTeams($userId)
+    {
+        return TeamMember::where('user_id', $userId)->with('team')->get();
+    }
 }

@@ -26,4 +26,12 @@ class Team extends Model
     public function members() {
         return $this->hasMany(TeamMember::class, 'team_id')->orderBy('created_at', 'desc');
     }
+    
+    public function owner() {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+    
+    public function user() {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

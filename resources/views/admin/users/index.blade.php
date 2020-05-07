@@ -28,17 +28,15 @@
                         <th>
                             {{ trans('global.user.fields.email') }}
                         </th>
-                        <th>
-                            Location
-                        </th>
-                        <th>
-                            Company
-                        </th>
-                        <th>
-                            Details
-                        </th>
+                        
                         <th>
                             Signup
+                        </th>
+                        <th>
+                            Teams
+                        </th>
+                        <th>
+                            People
                         </th>
                         <th>
                             Remarks
@@ -49,7 +47,27 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php 
+                        $userObj = new \App\User();
+                        $teamObj = new \App\Team();
+                    ?>
                     @foreach($users as $key => $user)
+                        <?php 
+                            $teams = $userObj->getTeams($user->id);
+                            $memberCount = 0;
+                            $teamCount = 0;
+                            foreach($teams as $team) {
+                                $teamDetails = $teamObj->where('id', $team->team_id)->with('members')->with('owner')->first();
+                                if(!empty($teamDetails->members) && $teamDetails->status == 1 && isset($teamDetails->owner->name)) {
+                                    if($teamDetails->created_by == $user->id) {
+                                        $teamCount ++;
+                                    }
+                                    foreach($teamDetails->members as $member) {
+                                        $memberCount ++;
+                                    }
+                                }
+                            }
+                        ?>
                         <tr data-entry-id="{{ $user->id }}">
                             <td>
 
@@ -61,16 +79,13 @@
                                 {{ $user->email ?? '' }}
                             </td>
                             <td>
-                                <span data-toggle="tooltip" title="{{ $user->country ?? '' }}">{{ $user->city ?? '' }}</span>
-                            </td>
-                            <td>
-                                {{ $user->company ?? '' }}
-                            </td>
-                            <td>
-                                <span data-toggle="tooltip" title="{{ $user->device ?? '' }}">{{ $user->browser ?? '' }}</span>
-                            </td>
-                            <td>
                                 {{ date('d.m.y', strtotime($user->created_at)) ?? '' }}
+                            </td>
+                            <td>
+                                {{ $teamCount }}
+                            </td>
+                            <td>
+                                {{ $memberCount }}
                             </td>
                             <td>
                                 {{ $user->remarks ?? '' }}
