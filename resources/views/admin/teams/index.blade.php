@@ -64,7 +64,7 @@
                                 @if(!empty($meeting))
                                     {{ date('d.m.y', strtotime($meeting->created_at)) ?? '' }}
                                 @else
-                                    No login
+                                    {{ date('d.m.y', strtotime($team->created_at)) ?? '' }}
                                 @endif
                             </td>
                             <td>
