@@ -33,13 +33,13 @@
                             Signup
                         </th>
                         <th>
-                            Teams
+                            Login time
                         </th>
                         <th>
-                            People
+                            Status
                         </th>
                         <th>
-                            Remarks
+                            Space
                         </th>
                         <th>
                             &nbsp;
@@ -48,26 +48,15 @@
                 </thead>
                 <tbody id="userList">
                     <?php
-                    $userObj = new \App\User();
-                    $teamObj = new \App\Team();
-                    $status = [1 => 'user-active', 2 => 'user-offline', 3 => 'user-in-meeting', 4 => 'user-personal-work', 5 => 'user-deep-work', 6 => 'user-active'];
+                        $status = [1 => 'user-active', 2 => 'user-offline', 3 => 'user-in-meeting', 4 => 'user-personal-work', 5 => 'user-deep-work', 6 => 'user-active'];
                     ?>
                     @foreach($users as $key => $user)
                     <?php
-                    $teams = $userObj->getTeams($user->id);
                     $memberCount = 0;
-                    $teamCount = 0;
-                    foreach ($teams as $team) {
-                        $teamDetails = $teamObj->where('id', $team->team_id)->with('members')->with('owner')->first();
-                        if (!empty($teamDetails->members) && $teamDetails->status == 1 && isset($teamDetails->owner->name)) {
-                            if ($teamDetails->created_by == $user->id) {
-                                $teamCount++;
-                            }
-                            foreach ($teamDetails->members as $member) {
-                                $memberCount++;
-                            }
-                        }
-                    }
+                    $query = "SELECT m.*, t.team_name FROM meetings m LEFT JOIN teams t ON t.id = m.team_id where m.user_id = {$user->id} order by m.created_at desc limit 1";
+                    $userStatus = \Illuminate\Support\Facades\DB::select($query);
+                    $query2 = "SELECT m.* from meetings m where m.user_id = {$user->id} AND DATE(created_at) = '".date('Y-m-d')."' order by m.created_at ASC limit 1";
+                    $userStatus2 = \Illuminate\Support\Facades\DB::select($query2);
                     ?>
                     <tr data-entry-id="{{ $user->id }}">
                         <td>
@@ -83,13 +72,23 @@
                             {{ date('d.m.y', strtotime($user->created_at)) ?? '' }}
                         </td>
                         <td>
-                            {{ $teamCount }}
+                            {{ \Carbon\Carbon::parse(strtotime($userStatus2[0]->created_at))->setTimezone($user->timezone)->format('d.m.y H:i:s') }}
                         </td>
                         <td>
-                            {{ $memberCount }}
+                           <span class="user-active {{$status[$user->status]}}"></span>
                         </td>
                         <td>
-                            {{ $user->remarks ?? '' }}
+                            @if($user->status == 3)
+                                Meeting {{$userStatus[0]->team_name}}
+                            @elseif($user->status == 6)
+                                VO {{$userStatus[0]->team_name}}
+                            @elseif($user->status == 1)
+                                Online
+                            @elseif($user->status == 4)
+                                Personal work
+                            @elseif($user->status == 5)
+                                Deep work {{$userStatus[0]->team_name}}
+                            @endif
                         </td>
                         <td>
                             @can('user_show')
@@ -111,7 +110,7 @@
                                 </a>
                             </form>
                             @endcan
-                            <span class="user-active {{$status[$user->status]}}"></span>
+                            
                         </td>
                     </tr>
                     @endforeach
@@ -161,7 +160,7 @@
         var token = $('meta[name=csrf-token]').attr('content');
         $.ajax({
             type: 'GET',
-            url: '/admin/users/onlineusers',
+            url: '/admin/onlineusers',
             headers: {"x-csrf-token": token},
             dataType: 'JSON',
             success: function (data) {

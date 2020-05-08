@@ -102,11 +102,10 @@ table.dataTable thead .sorting_desc {
     background: #f32727;
 }
 
-.user-personal-work{
+.user-deep-work{
     background: #f18022;
 }
 
-
-.user-deep-work{
+.user-personal-work{
     background: #3993eb;
 }
