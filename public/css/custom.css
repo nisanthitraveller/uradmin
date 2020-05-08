@@ -88,3 +88,25 @@ table.dataTable thead .sorting_desc {
     line-height: 1.5;
     border-radius: 3px;
 }
+.user-active{
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    border-radius: 50%;
+    background: #54be14;
+}
+.user-offline{
+    background: #b5b5b5;
+}
+.user-in-meeting{
+    background: #f32727;
+}
+
+.user-personal-work{
+    background: #f18022;
+}
+
+
+.user-deep-work{
+    background: #3993eb;
+}

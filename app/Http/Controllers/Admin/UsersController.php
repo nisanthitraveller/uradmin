@@ -84,4 +84,17 @@ class UsersController extends Controller
 
         return response(null, 204);
     }
+    public function onlineusers(\Illuminate\Http\Request $request)
+    {
+        abort_unless(\Gate::allows('user_access'), 403);
+        $query = "SELECT * FROM users WHERE DATE(updated_at) = '" . date('Y-m-d') . "' AND status != 2";
+        $users = \Illuminate\Support\Facades\DB::select($query);
+        
+        if(!$request->ajax()) {
+            return view('admin.users.online', compact('users'));
+        } else {
+            $returnHTML = view('admin.users.online_ajax', compact('users'))->render();
+            return response()->json(array('success' => true, 'html' => $returnHTML));
+        }
+    }
 }
