@@ -72,8 +72,8 @@
 
                                     <td data-sort="{{$totalDuration}}">
                                         <?php
-                                            $totalDuration = array_sum($data['meeting']);
-                                            echo gmdate('H:i', $totalDuration);
+                                            $totalDuration1 = array_sum($data['meeting']);
+                                            echo gmdate('H:i:s', $totalDuration1);
                                         ?>
                                     </td>
                                     <td></td>
