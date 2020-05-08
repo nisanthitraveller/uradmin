@@ -42,6 +42,14 @@
                             {{ trans('global.user.title') }}
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route("admin.users.onlineusers") }}" class="nav-link {{ request()->is('admin/onlineusers') || request()->is('admin/onlineusers/*') ? 'active' : '' }}">
+                            <i class="fas fa-user nav-icon">
+
+                            </i>
+                            Online users
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item nav-dropdown">
@@ -62,7 +70,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route("admin.teams.vomeetings") }}" class="nav-link {{ request()->is('admin/teams/vomeetings') || request()->is('admin/teams/vomeetings/*') ? 'active' : '' }}">
+                        <a href="{{ route("admin.teams.vomeetings") }}" class="nav-link {{ request()->is('admin/vomeetings') || request()->is('admin/vomeetings/*') ? 'active' : '' }}">
                             <i class="fas fa-unlock-alt nav-icon">
 
                             </i>
@@ -70,7 +78,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route("admin.teams.meetings") }}" class="nav-link {{ request()->is('admin/teams/meetings') || request()->is('admin/teams/meetings/*') ? 'active' : '' }}">
+                        <a href="{{ route("admin.teams.meetings") }}" class="nav-link {{ request()->is('admin/meetings') || request()->is('admin/meetings/*') ? 'active' : '' }}">
                             <i class="fas fa-unlock-alt nav-icon">
 
                             </i>
