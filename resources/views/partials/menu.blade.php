@@ -70,7 +70,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route("admin.teams.vomeetings") }}" class="nav-link {{ request()->is('admin/teams/meetings') || request()->is('admin/teams/meetings/*') ? 'active' : '' }}">
+                        <a href="{{ route("admin.teams.meetings") }}" class="nav-link {{ request()->is('admin/teams/meetings') || request()->is('admin/teams/meetings/*') ? 'active' : '' }}">
                             <i class="fas fa-unlock-alt nav-icon">
 
                             </i>
