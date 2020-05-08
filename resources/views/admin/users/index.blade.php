@@ -16,7 +16,7 @@
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover table-condensed datatable p-0">
+            <table class=" table table-bordered table-striped table-hover table-condensed datatable p-0 table-sm compact">
                 <thead>
                     <tr>
                         <th width="10">
@@ -154,7 +154,7 @@
   dtButtons.push(deleteButton)
 @endcan
 
-  $('.datatable:not(.ajaxTable)').DataTable({ buttons: dtButtons });
+  $('.datatable:not(.ajaxTable)').DataTable({ buttons: dtButtons, pageLength : 500 })
   $('[data-toggle="tooltip"]').tooltip();
 })
 

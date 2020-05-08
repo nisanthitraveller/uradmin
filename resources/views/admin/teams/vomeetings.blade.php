@@ -2,12 +2,12 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        VO list
+        {{$title}}
     </div>
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable">
+            <table class=" table table-bordered table-striped table-hover datatable p-0 table-sm compact">
                 <thead>
                     <tr>
                         <th width="10">
@@ -28,42 +28,58 @@
                         <th>
                             Duration
                         </th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php 
                         $teamObj = new \App\Team();
+                        $teamData = [];
+                    
+                        foreach($meetings as $key => $meeting1):
+                            foreach($meeting1 as $meeting):
+                                $teamDetails = $teamObj->where('id', $meeting->team_id)->with('members')->with('owner')->first(); 
+                                $startTime = \Carbon\Carbon::parse($meeting->created_at);
+                                $finishTime = \Carbon\Carbon::parse($meeting->updated_at);
+                                $totalDuration = $finishTime->diffInSeconds($startTime);
+                                $teamData[$key][$meeting->team_id]['meeting'][] = $totalDuration;
+                                $teamData[$key][$meeting->team_id]['team_name'] = $teamDetails->team_name;
+                                $teamData[$key][$meeting->team_id]['owner_name'] = $teamDetails->owner->name;
+                                $teamData[$key][$meeting->team_id]['owner_email'] = $teamDetails->owner->email;
+                            endforeach;
+                        endforeach;
                     ?>
-                    @foreach($meetings as $key => $meeting)
-                        <tr data-entry-id="{{ $meeting->id }}">
-                            <td>
-                                <?php 
-                                    $teamDetails = $teamObj->where('id', $meeting->team_id)->with('members')->with('owner')->first(); 
-                                ?>
-                            </td>
-                            <td data-sort="{{strtotime($meeting->created_at)}}">
-                                {{ date('d.m.y', strtotime($meeting->created_at)) ?? '' }}
-                            </td>
-                            <td>
-                                {{ $teamDetails->team_name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $teamDetails->owner->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $teamDetails->owner->email ?? '' }}
-                            </td>
-                            
-                            <td>
-                                <?php
-                                    $startTime = \Carbon\Carbon::parse($meeting->created_at);
-                                    $finishTime = \Carbon\Carbon::parse($meeting->updated_at);
-                                    $totalDuration = $finishTime->diffInSeconds($startTime);
-                                    echo gmdate('H:i', $totalDuration);
-                                ?>
-                            </td>
+                        
+                    @foreach($teamData as $key1 => $data1)
+                        @foreach($data1 as $data)
+                            <tr data-entry-id="{{ strtotime($key1) }}">
 
-                        </tr>
+                                    <td>
+
+                                    </td>
+                                    <td data-sort="{{strtotime($key1)}}">
+                                        {{ date('d.m.y', strtotime($key1)) ?? '' }}
+                                    </td>
+                                    <td>
+                                        {{ $data['team_name'] ?? '' }}
+                                    </td>
+                                    <td>
+                                        {{ $data['owner_name'] ?? '' }}
+                                    </td>
+                                    <td>
+                                        {{ $data['owner_email'] ?? '' }}
+                                    </td>
+
+                                    <td data-sort="{{$totalDuration}}">
+                                        <?php
+                                            $totalDuration = array_sum($data['meeting']);
+                                            echo gmdate('H:i', $totalDuration);
+                                        ?>
+                                    </td>
+                                    <td></td>
+
+                            </tr>
+                        @endforeach
                     @endforeach
                 </tbody>
             </table>
@@ -105,7 +121,7 @@
   dtButtons.push(deleteButton)
 @endcan
 
-  $('.datatable:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  $('.datatable:not(.ajaxTable)').DataTable({ buttons: dtButtons, pageLength : 500 })
 })
 
 </script>

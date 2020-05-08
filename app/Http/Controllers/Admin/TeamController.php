@@ -85,16 +85,20 @@ class TeamController extends Controller
     public function vomeetings()
     {
         abort_unless(\Gate::allows('team_access'), 403);
-
-        $meetings = \Illuminate\Support\Facades\DB::table('meetings')->where('team_id', '!=', 0)->where('type', 6)->orderBy('created_at', 'desc')->orderBy('team_id', 'asc')->get();
-        return view('admin.teams.vomeetings', compact('meetings'));
+        $title = 'Virtual Office List';
+        $meetings = \Illuminate\Support\Facades\DB::table('meetings')->where('team_id', '!=', 0)->where('type', 6)->orderBy('created_at', 'desc')->get()->groupBy(function($date) {
+            return Carbon::parse($date->created_at)->format('Y-m-d');
+        });
+        return view('admin.teams.vomeetings', compact('meetings', 'title'));
     }
     public function meetings()
     {
         abort_unless(\Gate::allows('team_access'), 403);
-
-        $meetings = \Illuminate\Support\Facades\DB::table('meetings')->where('team_id', '!=', 0)->where('type', 3)->orderBy('id', 'desc')->get();
+        $title = 'Meeting List';
+        $meetings = \Illuminate\Support\Facades\DB::table('meetings')->where('team_id', '!=', 0)->where('type', 3)->orderBy('created_at', 'desc')->get()->groupBy(function($date) {
+            return Carbon::parse($date->created_at)->format('Y-m-d');
+        });
         
-        return view('admin.teams.vomeetings', compact('meetings'));
+        return view('admin.teams.vomeetings', compact('meetings', 'title'));
     }
 }

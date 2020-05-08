@@ -7,7 +7,7 @@
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable">
+            <table class=" table table-bordered table-striped table-hover datatable p-0 table-sm compact">
                 <thead>
                     <tr>
                         <th width="10">
@@ -61,7 +61,7 @@
                             <td>
                                 {{ count($team->members) ?? '' }}
                             </td>
-                            <td>
+                            <td data-sort="{{strtotime($team->created_at)}}">
                                 {{ date('d.m.y', strtotime($team->created_at)) ?? '' }}
                             </td>
                             <td data-sort="{{strtotime($mydate)}}">
@@ -69,14 +69,16 @@
                             </td>
                             <td>
                                 
-                                <a class="btn btn-xs btn-warning" href="{{ route('admin.teams.members', $team->id) }}">
-                                    {{ trans('global.members') }}
+                                <a href="{{ route('admin.teams.members', $team->id) }}">
+                                    <i class="fa fa-users"></i>
                                 </a>
                                 @can('team_delete')
                                     <form action="{{ route('admin.teams.destroy', $team->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        <a href="javascript:;" onclick="$(this).parent().submit()">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
                                     </form>
                                 @endcan
                             </td>
@@ -123,7 +125,7 @@
   dtButtons.push(deleteButton)
 @endcan
 
-  $('.datatable:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  $('.datatable:not(.ajaxTable)').DataTable({ buttons: dtButtons, pageLength : 500 })
 })
 
 </script>
