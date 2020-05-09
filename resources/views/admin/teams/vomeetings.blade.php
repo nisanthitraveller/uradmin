@@ -38,14 +38,16 @@
                     
                         foreach($meetings as $key => $meeting1):
                             foreach($meeting1 as $meeting):
-                                $teamDetails = $teamObj->where('id', $meeting->team_id)->with('members')->with('owner')->first(); 
-                                $startTime = \Carbon\Carbon::parse($meeting->created_at);
-                                $finishTime = \Carbon\Carbon::parse($meeting->updated_at);
-                                $totalDuration = $finishTime->diffInSeconds($startTime);
-                                $teamData[$key][$meeting->team_id]['meeting'][] = $totalDuration;
-                                $teamData[$key][$meeting->team_id]['team_name'] = $teamDetails->team_name;
-                                $teamData[$key][$meeting->team_id]['owner_name'] = $teamDetails->owner->name;
-                                $teamData[$key][$meeting->team_id]['owner_email'] = $teamDetails->owner->email;
+                                $teamDetails = $teamObj->where('id', $meeting->team_id)->with('members')->with('owner')->first();
+                                if(isset($teamDetails->owner)) {
+                                    $startTime = \Carbon\Carbon::parse($meeting->created_at);
+                                    $finishTime = \Carbon\Carbon::parse($meeting->updated_at);
+                                    $totalDuration = $finishTime->diffInSeconds($startTime);
+                                    $teamData[$key][$meeting->team_id]['meeting'][] = $totalDuration;
+                                    $teamData[$key][$meeting->team_id]['team_name'] = $teamDetails->team_name;
+                                    $teamData[$key][$meeting->team_id]['owner_name'] = $teamDetails->owner->name;
+                                    $teamData[$key][$meeting->team_id]['owner_email'] = $teamDetails->owner->email;
+                                }
                             endforeach;
                         endforeach;
                     ?>
