@@ -72,7 +72,7 @@
                                         {{ $data['owner_email'] ?? '' }}
                                     </td>
 
-                                    <td data-sort="{{$totalDuration}}">
+                                    <td data-sort="{{array_sum($data['meeting'])}}">
                                         <?php
                                             $totalDuration1 = array_sum($data['meeting']);
                                             echo gmdate('H:i:s', $totalDuration1);
