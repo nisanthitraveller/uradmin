@@ -29,16 +29,16 @@
                             {{ trans('global.user.fields.email') }}
                         </th>
                         
-                        <th width="70">
+                        <th width="50">
                             Signup
                         </th>
-                        <th width="50">
+                        <th width="40">
                             Teams
                         </th>
-                        <th width="50">
+                        <th width="40">
                             People
                         </th>
-                        <th width="350">
+                        <th width="370">
                             Remarks
                         </th>
                         <th width="70">
@@ -73,10 +73,10 @@
 
                             </td>
                             <td>
-                                {{ $user->name ?? '' }}
+                                {{ substr($user->name, 0, 35) ?? '' }}
                             </td>
                             <td>
-                                {{ $user->email ?? '' }}
+                                {{ substr($user->email, 0, 35) ?? '' }}
                             </td>
                             <td data-sort="{{strtotime($user->created_at)}}">
                                 {{ date('d.m.y', strtotime($user->created_at)) ?? '' }}
