@@ -94,25 +94,7 @@
                             @endif
                         </td>
                         <td>
-                            @can('user_show')
-                            <a href="{{ route('admin.users.show', $user->id) }}">
-                                <i class="fa fa-search"></i>
-                            </a>
-                            @endcan
-                            @can('user_edit')
-                            <a href="{{ route('admin.users.edit', $user->id) }}">
-                                <i class="fa fa-pencil"></i>
-                            </a>
-                            @endcan
-                            @can('user_delete')
-                            <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <a href="javascript:;" onclick="$(this).parent().submit()">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                            </form>
-                            @endcan
+                            
                             
                         </td>
                     </tr>
