@@ -22,26 +22,26 @@
                         <th width="10">
 
                         </th>
-                        <th>
+                        <th width="180">
                             {{ trans('global.user.fields.name') }}
                         </th>
-                        <th>
+                        <th width="180">
                             {{ trans('global.user.fields.email') }}
                         </th>
                         
-                        <th>
+                        <th width="70">
                             Signup
                         </th>
-                        <th>
+                        <th width="50">
                             Teams
                         </th>
-                        <th>
+                        <th width="50">
                             People
                         </th>
-                        <th>
+                        <th width="350">
                             Remarks
                         </th>
-                        <th>
+                        <th width="70">
                             &nbsp;
                         </th>
                     </tr>
@@ -92,12 +92,12 @@
                             </td>
                             <td>
                                 @can('user_show')
-                                    <a href="{{ route('admin.users.show', $user->id) }}">
+                                <a href="{{ route('admin.users.show', $user->id) }}" style="margin-right: 10px">
                                         <i class="fa fa-search"></i>
                                     </a>
                                 @endcan
                                 @can('user_edit')
-                                    <a href="{{ route('admin.users.edit', $user->id) }}">
+                                    <a href="{{ route('admin.users.edit', $user->id) }}" style="margin-right: 10px">
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                 @endcan
