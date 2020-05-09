@@ -69,7 +69,7 @@
                             </td>
                             <td>
                                 
-                                <a href="{{ route('admin.teams.members', $team->id) }}">
+                                <a href="{{ route('admin.teams.members', $team->id) }}" style="margin-right: 10px>
                                     <i class="fa fa-users"></i>
                                 </a>
                                 @can('team_delete')
