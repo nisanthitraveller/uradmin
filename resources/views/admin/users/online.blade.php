@@ -57,6 +57,7 @@
                     $userStatus = \Illuminate\Support\Facades\DB::select($query);
                     $query2 = "SELECT m.* from meetings m where m.user_id = {$user->id} AND DATE(created_at) = '".date('Y-m-d')."' order by m.created_at ASC limit 1";
                     $userStatus2 = \Illuminate\Support\Facades\DB::select($query2);
+                    if(isset($userStatus2[0]) && isset($userStatus[0])) {
                     ?>
                     <tr data-entry-id="{{ $user->id }}">
                         <td>
@@ -72,7 +73,9 @@
                             {{ date('d.m.y', strtotime($user->created_at)) ?? '' }}
                         </td>
                         <td>
+                            @if(isset($userStatus2[0]))
                             {{ \Carbon\Carbon::parse(strtotime($userStatus2[0]->created_at))->setTimezone($user->timezone)->format('d.m.y H:i:s') }}
+                            @endif
                         </td>
                         <td>
                            <span class="user-active {{$status[$user->status]}}"></span>
@@ -113,6 +116,7 @@
                             
                         </td>
                     </tr>
+                    <?php } ?>
                     @endforeach
                 </tbody>
             </table>
