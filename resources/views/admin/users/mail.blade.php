@@ -49,7 +49,7 @@
             </div>
             <div class="form-group">
                 <label>Content</label>
-                <textarea id="content" name="content" required="" class="form-control ckeditor"></textarea>
+                <textarea id="content" name="content" class="form-control ckeditor"></textarea>
             </div>
             <div>
                  <input type="hidden" id="user_id" name="user_id" value="{{$user->id}}">
