@@ -110,7 +110,8 @@ class UsersController extends Controller
             $saved = \App\Email::create($data->toArray());
             Mail::send('emails.email-template', ['data' => $data], function ($m) use ($data) {
                 $m->from('hello@unremot.com', 'Hello UnRemot');
-                $m->replyTo($data['email'], $data['name']);
+                $m->replyTo('hello@unremot.com', 'Hello UnRemot');
+                $m->cc('hello@unremot.com');
                 $m->to($data['email'])->subject($data['subject']);
             });
             return redirect()->back()->with('success', 'Mail sent successfully.');
