@@ -73,7 +73,7 @@
 
                             </td>
                             <td>
-                                {{ substr($user->name, 0, 35) ?? '' }}
+                                {{ substr(ucfirst(strtolower($user->name)), 0, 35) ?? '' }}
                             </td>
                             <td>
                                 {{ substr($user->email, 0, 35) ?? '' }}
@@ -92,8 +92,8 @@
                             </td>
                             <td>
                                 @can('user_show')
-                                <a href="{{ route('admin.users.show', $user->id) }}" style="margin-right: 10px">
-                                        <i class="fa fa-search"></i>
+                                <a href="{{ route('admin.users.mail', ['userId' => $user->id]) }}" style="margin-right: 10px">
+                                        <i class="fa fa-envelope-square"></i>
                                     </a>
                                 @endcan
                                 @can('user_edit')

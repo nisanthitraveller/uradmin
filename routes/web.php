@@ -20,6 +20,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
 
     Route::get('onlineusers', 'UsersController@onlineusers')->name('users.onlineusers');
+    Route::get('mail', 'UsersController@mail')->name('users.mail');
+    Route::post('sendmail', 'UsersController@sendmail')->name('users.sendmail');
     Route::resource('users', 'UsersController');
 
     Route::delete('products/destroy', 'ProductsController@massDestroy')->name('products.massDestroy');
@@ -31,5 +33,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('vomeetings', 'TeamController@vomeetings')->name('teams.vomeetings');
     Route::get('meetings', 'TeamController@meetings')->name('teams.meetings');
     Route::resource('teams', 'TeamController');
+    
+    Route::get('emails', 'HomeController@emails')->name('emails');
     
 });

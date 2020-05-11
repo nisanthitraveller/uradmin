@@ -88,6 +88,14 @@
                 </ul>
             </li>
             <li class="nav-item">
+                <a href="{{ route("admin.emails") }}" class="nav-link  {{ request()->is('admin/emails') || request()->is('admin/emails/*') ? 'active' : '' }}"">
+                    <i class="nav-icon fas fa-envelope-square">
+
+                    </i>
+                    Emails
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                     <i class="nav-icon fas fa-sign-out-alt">
 

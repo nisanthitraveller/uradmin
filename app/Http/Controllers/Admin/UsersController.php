@@ -8,6 +8,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Role;
 use App\User;
+use Illuminate\Support\Facades\Mail;
 
 class UsersController extends Controller
 {
@@ -95,6 +96,27 @@ class UsersController extends Controller
         } else {
             $returnHTML = view('admin.users.online_ajax', compact('users'))->render();
             return response()->json(array('success' => true, 'html' => $returnHTML));
+        }
+    }
+    
+    public function mail(\Illuminate\Http\Request $request)
+    {
+        $user = User::where('id', $request['userId'])->first();
+        return view('admin.users.mail', compact('user'));
+    }
+    
+    public function sendmail(\Illuminate\Http\Request $data) {
+        try {
+            $saved = \App\Email::create($data->toArray());
+            Mail::send('emails.email-template', ['data' => $data], function ($m) use ($data) {
+                $m->from('hello@unremot.com', 'Hello UnRemot');
+                $m->replyTo($data['email'], $data['name']);
+                $m->to($data['email'])->subject($data['subject']);
+            });
+            return redirect()->back()->with('success', 'Mail sent successfully.');
+        } catch(\Exception $e) {
+            \Log::info($e->getMessage());
+            return redirect()->back()->with('failure', 'Mail failed.');
         }
     }
 }
