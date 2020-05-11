@@ -64,7 +64,7 @@
                             
                         </td>
                         <td>
-                            {{ ucfirst(strtolower($user->name)) ?? '' }}
+                            {{ substr(ucwords(strtolower($user->name)), 0, 100) ?? '' }}
                         </td>
                         <td>
                             {{ $user->email ?? '' }}

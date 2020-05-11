@@ -15,7 +15,7 @@ if (isset($userStatus2[0]) && isset($userStatus[0])) {
 
         </td>
         <td>
-            {{ $user->name ?? '' }}
+            {{ substr(ucwords(strtolower($user->name)), 0, 100) ?? '' }}
         </td>
         <td>
             {{ $user->email ?? '' }}

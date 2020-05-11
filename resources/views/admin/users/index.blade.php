@@ -73,7 +73,7 @@
 
                             </td>
                             <td>
-                                {{ substr(ucfirst(strtolower($user->name)), 0, 35) ?? '' }}
+                                {{ substr(ucwords(strtolower($user->name)), 0, 35) ?? '' }}
                             </td>
                             <td>
                                 {{ substr($user->email, 0, 35) ?? '' }}
