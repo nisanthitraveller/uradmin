@@ -8,14 +8,20 @@
 
     <div class="card-body">
         @if(session('success'))
-            <span class="alert alert-success" role="alert">
-                <strong>{{ session('success') }}</strong>
-            </span>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> Mail sent successfully.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
        @endif
        @if(session('failure'))
-            <span class="alert alert-danger" role="alert">
-                <strong>{{ session('failure') }}</strong>
-            </span>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Error!</strong> Mail sending failed.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
        @endif
         <form action="{{ route("admin.users.sendmail", [$user->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
