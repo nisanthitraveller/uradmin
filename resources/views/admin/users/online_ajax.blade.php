@@ -25,7 +25,7 @@ if (isset($userStatus2[0]) && isset($userStatus[0])) {
         </td>
         <td>
             @if(isset($userStatus2[0]))
-            {{ \Carbon\Carbon::parse(strtotime($userStatus2[0]->created_at))->setTimezone($user->timezone)->format('d.m.y H:i:s') }}
+            {{ \Carbon\Carbon::parse(strtotime($userStatus2[0]->created_at))->setTimezone(auth()->user()->timezone)->format('d.m.y H:i:s') }}
             @endif
         </td>
         <td>
