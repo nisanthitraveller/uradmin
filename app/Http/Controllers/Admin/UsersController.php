@@ -88,7 +88,7 @@ class UsersController extends Controller
     public function onlineusers(\Illuminate\Http\Request $request)
     {
         abort_unless(\Gate::allows('user_access'), 403);
-        $query = "SELECT * FROM users WHERE DATE(updated_at) = '" . date('Y-m-d') . "' AND status != 2";
+        $query = "SELECT * FROM users WHERE DATE(updated_at) = '" . date('Y-m-d') . "' AND status != 2 AND TIMESTAMPDIFF(SECOND, updated_at, NOW()) <= 30";
         $users = \Illuminate\Support\Facades\DB::select($query);
         
         if(!$request->ajax()) {
