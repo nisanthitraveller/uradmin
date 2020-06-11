@@ -13,7 +13,7 @@ class TeamController extends Controller
 {
     public function index()
     {
-        abort_unless(\Gate::allows('team_access'), 403);
+        //abort_unless(\Gate::allows('team_access'), 403);
 
         $teams = Team::with('owner')->with('members')->orderBy('id', 'desc')->get();
 
@@ -22,14 +22,14 @@ class TeamController extends Controller
 
     public function create()
     {
-        abort_unless(\Gate::allows('team_create'), 403);
+        //abort_unless(\Gate::allows('team_create'), 403);
 
         return view('admin.teams.create');
     }
 
     public function store(StoreTeamRequest $request)
     {
-        abort_unless(\Gate::allows('team_create'), 403);
+        //abort_unless(\Gate::allows('team_create'), 403);
 
         $team = Team::create($request->all());
 
@@ -92,7 +92,7 @@ class TeamController extends Controller
     
     public function vomeetings()
     {
-        abort_unless(\Gate::allows('team_access'), 403);
+        //abort_unless(\Gate::allows('team_access'), 403);
         $title = 'Virtual Office List';
         $meetings = \Illuminate\Support\Facades\DB::table('meetings')->where('team_id', '!=', 0)->where('type', 6)->orderBy('created_at', 'desc')->get()->groupBy(function($date) {
             return Carbon::parse($date->created_at)->format('Y-m-d');
@@ -101,7 +101,7 @@ class TeamController extends Controller
     }
     public function meetings()
     {
-        abort_unless(\Gate::allows('team_access'), 403);
+        //abort_unless(\Gate::allows('team_access'), 403);
         $title = 'Meeting List';
         $meetings = \Illuminate\Support\Facades\DB::table('meetings')->where('team_id', '!=', 0)->where('type', 3)->orderBy('created_at', 'desc')->get()->groupBy(function($date) {
             return Carbon::parse($date->created_at)->format('Y-m-d');
