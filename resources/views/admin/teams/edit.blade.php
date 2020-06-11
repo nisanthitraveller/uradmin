@@ -22,6 +22,10 @@
                     {{ trans('global.team.fields.name_helper') }}
                 </p>
             </div>
+            <div class="form-group">
+                <label for="feed">Feed Status</label>
+                <input type="text" id="feed" name="feed" class="form-control" value="{{ old('feed', isset($team) ? $team->feed : '') }}">
+            </div>
             <div>
                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
             </div>
