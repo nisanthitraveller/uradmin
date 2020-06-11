@@ -72,7 +72,7 @@
                                 <a href="{{ route('admin.teams.members', $team->id) }}" style="margin-right: 10px>
                                     <i class="fa fa-users"></i>
                                 </a>
-                                <a href="{{ route('admin.teams.edit', $user->id) }}" style="margin-right: 10px">
+                                <a href="{{ route('admin.teams.edit', $team->id) }}" style="margin-right: 10px">
                                     <i class="fa fa-pencil"></i>
                                 </a>
                                 @can('team_delete')
