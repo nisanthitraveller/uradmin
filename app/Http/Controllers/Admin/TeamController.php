@@ -38,14 +38,14 @@ class TeamController extends Controller
 
     public function edit(Team $team)
     {
-        abort_unless(\Gate::allows('team_edit'), 403);
+        //abort_unless(\Gate::allows('team_edit'), 403);
 
         return view('admin.teams.edit', compact('team'));
     }
 
     public function update(UpdateProductRequest $request, Team $team)
     {
-        abort_unless(\Gate::allows('team_edit'), 403);
+        //abort_unless(\Gate::allows('team_edit'), 403);
 
         $team->update($request->all());
 
@@ -54,14 +54,14 @@ class TeamController extends Controller
 
     public function show(Team $team)
     {
-        abort_unless(\Gate::allows('team_show'), 403);
+        //abort_unless(\Gate::allows('team_show'), 403);
 
         return view('admin.teams.show', compact('team'));
     }
 
     public function destroy(Team $team)
     {
-        abort_unless(\Gate::allows('team_delete'), 403);
+        //abort_unless(\Gate::allows('team_delete'), 403);
 
         $team->delete();
 
@@ -74,6 +74,14 @@ class TeamController extends Controller
 
         return response(null, 204);
     }
+    
+    public function massFeed()
+    {
+        Team::whereIn('id', request('ids'))->update(['feed' => 1]);
+
+        return response(null, 204);
+    }
+    
     public function members($teamId)
     {
         //abort_unless(\Gate::allows('team_members'), 403);

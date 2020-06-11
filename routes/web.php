@@ -32,6 +32,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('teams/members/{teamId}', 'TeamController@members')->name('teams.members');
     Route::get('vomeetings', 'TeamController@vomeetings')->name('teams.vomeetings');
     Route::get('meetings', 'TeamController@meetings')->name('teams.meetings');
+    Route::post('meetings', 'TeamController@massFeed')->name('teams.massFeed');
     Route::resource('teams', 'TeamController');
     
     Route::get('emails', 'HomeController@emails')->name('emails');
