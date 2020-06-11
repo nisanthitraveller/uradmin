@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+<?php $feed = [0 => 'No', 1 => 'Yes'];?>
 <div class="card">
     <div class="card-header">
         {{ trans('global.team.title_singular') }} {{ trans('global.list') }}
@@ -24,6 +25,9 @@
                         </th>
                         <th>
                             Members
+                        </th>
+                        <th>
+                            Feed
                         </th>
                         <th>
                             Created
@@ -60,6 +64,10 @@
                             
                             <td>
                                 {{ count($team->members) ?? '' }}
+                            </td>
+                            
+                            <td>
+                                {{ $feed[$team->feed] ?? '' }}
                             </td>
                             <td data-sort="{{strtotime($team->created_at)}}">
                                 {{ date('d.m.y', strtotime($team->created_at)) ?? '' }}
