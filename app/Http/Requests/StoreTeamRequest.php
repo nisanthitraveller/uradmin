@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Product;
+use App\Team;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTeamRequest extends FormRequest

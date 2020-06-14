@@ -23,8 +23,16 @@
                 </p>
             </div>
             <div class="form-group">
-                <label for="feed">Feed Status</label>
-                <input type="text" id="feed" name="feed" class="form-control" value="{{ old('feed', isset($team) ? $team->feed : '') }}">
+                <label for="space_type_id">Space type</label>
+                <?php $spaceTypes = \Illuminate\Support\Facades\DB::table('space_types')->where('status', 1)->get(); ?>
+                <select name="space_type_id" class="form-control">
+                    @foreach($spaceTypes as $spaceType)
+                        <option @if($spaceType->id == $team->space_type_id) selected @endif value="{{$spaceType->id}}">{{$spaceType->type}}</option>
+                    @endforeach
+                </select>
+                <p class="helper-block">
+                    {{ trans('global.user.fields.email_helper') }}
+                </p>
             </div>
             <div>
                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">

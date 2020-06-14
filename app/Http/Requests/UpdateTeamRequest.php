@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Product;
+use App\Team;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateTeamRequest extends FormRequest
@@ -15,7 +15,10 @@ class UpdateTeamRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
+            'team_name' => [
+                'required',
+            ],
+            'space_type_id' => [
                 'required',
             ],
         ];

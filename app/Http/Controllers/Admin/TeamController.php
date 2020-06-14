@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyProductRequest;
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
+use App\Http\Requests\StoreTeamRequest;
+use App\Http\Requests\UpdateTeamRequest;
 use App\Team;
 use Carbon\Carbon;
 
@@ -43,7 +43,7 @@ class TeamController extends Controller
         return view('admin.teams.edit', compact('team'));
     }
 
-    public function update(UpdateProductRequest $request, Team $team)
+    public function update(UpdateTeamRequest $request, Team $team)
     {
         //abort_unless(\Gate::allows('team_edit'), 403);
 
