@@ -46,8 +46,12 @@ class TeamController extends Controller
     public function update(UpdateTeamRequest $request, Team $team)
     {
         //abort_unless(\Gate::allows('team_edit'), 403);
-
+        if($team->space_type_id == 1 && in_array($request->space_type_id, [2, 3, 4, 6])) {
+            \App\TeamMember::where('team_id', $team->id)
+                    ->update(['speaker' => 1]);
+        }
         $team->update($request->all());
+        
 
         return redirect()->route('admin.teams.index');
     }
