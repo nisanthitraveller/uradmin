@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class AddUserIdToRecruiterInfoTable extends Migration
+class AddUserIdToRecordingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddUserIdToRecruiterInfoTable extends Migration
      */
     public function up()
     {
-        Schema::table('recruiter_info', function (Blueprint $table) {
+        Schema::table('recordings', function (Blueprint $table) {
             $table->bigInteger('user_id')->nullable();
         });
     }
@@ -25,7 +25,7 @@ class AddUserIdToRecruiterInfoTable extends Migration
      */
     public function down()
     {
-        Schema::table('recruiter_info', function (Blueprint $table) {
+        Schema::table('recordings', function (Blueprint $table) {
             //
         });
     }
