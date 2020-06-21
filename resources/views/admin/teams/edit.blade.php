@@ -23,6 +23,22 @@
                 </p>
             </div>
             <div class="form-group">
+                <label for="holder">Handle</label>
+                <input type="text" id="team_name" name="team_name" class="form-control" value="{{ old('holder', isset($team) ? $team->holder : '') }}">
+            </div>
+            <div class="form-group">
+                <label>Public/Private</label>
+                <input type="text" name="privacy" class="form-control" value="{{ old('privacy', isset($team) ? $team->privacy : '') }}">
+            </div>
+            <div class="form-group">
+                <label>Invisible/Visible</label>
+                <input type="text" name="feed" class="form-control" value="{{ old('feed', isset($team) ? $team->feed : '') }}">
+            </div>
+            <div class="form-group">
+                <label >About</label>
+                <textarea class="ckeditor" name="about">{{ old('about', isset($team) ? $team->about : '') }}</textarea>
+            </div>
+            <div class="form-group">
                 <label for="space_type_id">Space type</label>
                 <?php $spaceTypes = \Illuminate\Support\Facades\DB::table('space_types')->where('status', 1)->get(); ?>
                 <select name="space_type_id" class="form-control">
