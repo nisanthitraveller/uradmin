@@ -22,6 +22,10 @@ class Team extends Model
         'updated_at',
         'deleted_at',
         'space_type_id',
+        'holder',
+        'privacy',
+        'feed',
+        'about',
     ];
     
     public function members() {

@@ -24,7 +24,7 @@
             </div>
             <div class="form-group">
                 <label for="holder">Handle</label>
-                <input type="text" id="team_name" name="team_name" class="form-control" value="{{ old('holder', isset($team) ? $team->holder : '') }}">
+                <input type="text" name="holder" class="form-control" value="{{ old('holder', isset($team) ? $team->holder : '') }}">
             </div>
             <div class="form-group">
                 <label>Public/Private</label>
