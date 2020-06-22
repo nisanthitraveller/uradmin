@@ -26,6 +26,7 @@ class Team extends Model
         'privacy',
         'feed',
         'about',
+        'featured',
     ];
     
     public function members() {

@@ -35,6 +35,10 @@
                 <input type="text" name="feed" class="form-control" value="{{ old('feed', isset($team) ? $team->feed : '') }}">
             </div>
             <div class="form-group">
+                <label>Featured</label>
+                <input type="text" name="featured" class="form-control" value="{{ old('featured', isset($team) ? $team->featured : '') }}">
+            </div>
+            <div class="form-group">
                 <label >About</label>
                 <textarea class="ckeditor" name="about">{{ old('about', isset($team) ? $team->about : '') }}</textarea>
             </div>
