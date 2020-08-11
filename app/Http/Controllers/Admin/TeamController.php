@@ -66,7 +66,7 @@ class TeamController extends Controller
     public function destroy(Team $team)
     {
         //abort_unless(\Gate::allows('team_delete'), 403);
-
+        \App\TeamMember::where('id', $team->id)->delete();
         $team->delete();
 
         return back();
@@ -75,6 +75,7 @@ class TeamController extends Controller
     public function massDestroy(MassDestroyProductRequest $request)
     {
         Team::whereIn('id', request('ids'))->delete();
+        \App\TeamMember::whereIn('team_id', request('ids'))->delete();
 
         return response(null, 204);
     }
