@@ -1,6 +1,13 @@
 @extends('layouts.admin')
 @section('content')
 <?php $feed = [0 => 'No', 1 => 'Yes'];?>
+<div style="margin-bottom: 10px;" class="row">
+    <div class="col-lg-12">
+        <a class="btn btn-success" href="{{ route("admin.tiles.create") }}">
+            Add tile
+        </a>
+    </div>
+</div>
 <div class="card">
     <div class="card-header">
         Product tiles

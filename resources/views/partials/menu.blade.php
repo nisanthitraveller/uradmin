@@ -95,6 +95,25 @@
                     Emails
                 </a>
             </li>
+            <li class="nav-item nav-dropdown">
+                <a class="nav-link  nav-dropdown-toggle">
+                    <i class="fas fa-users nav-icon">
+
+                    </i>
+                    Tile management
+                </a>
+                
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a href="{{ route("admin.tiles.index") }}" class="nav-link {{ request()->is('admin/tiles') || request()->is('admin/tiles/*') ? 'active' : '' }}">
+                            <i class="fas fa-teamspeak nav-icon">
+
+                            </i>
+                            Product tiles
+                        </a>
+                    </li>
+                </ul>
+            </li>
             <li class="nav-item">
                 <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                     <i class="nav-icon fas fa-sign-out-alt">
