@@ -35,6 +35,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('meetings', 'TeamController@massFeed')->name('teams.massFeed');
     Route::resource('teams', 'TeamController');
     
+    Route::delete('tiles/destroy', 'TilesController@massDestroy')->name('tiles.massDestroy');
+    Route::resource('tiles', 'TilesController');
+    
     Route::get('emails', 'HomeController@emails')->name('emails');
     
 });
