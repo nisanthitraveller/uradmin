@@ -1,7 +1,11 @@
 $(document).ready(function () {
   window._token = $('meta[name="csrf-token"]').attr('content')
 
-  ClassicEditor.create(document.querySelector('.ckeditor'))
+  //ClassicEditor.create(document.querySelector('.ckeditor'))
+    var allEditors = document.querySelectorAll('.ckeditor');
+    for (var i = 0; i < allEditors.length; ++i) {
+        ClassicEditor.create(allEditors[i])
+    }
 
   moment.updateLocale('en', {
     week: {dow: 1} // Monday is the first day of the week
