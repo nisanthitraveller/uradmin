@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFirstTimeLoginUsersTable extends Migration
+class AddImageProductTileTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddFirstTimeLoginUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->tinyInteger('first_time_login')->default(0)->nullable();
+        Schema::table('product_tiles', function (Blueprint $table) {
+            $table->string('image', 300)->nullable();
         });
     }
 
