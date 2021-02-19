@@ -15,7 +15,7 @@ class TeamController extends Controller
     {
         //abort_unless(\Gate::allows('team_access'), 403);
 
-        $teams = Team::whare('parent_id', 0)->with('owner')->with('members')->orderBy('id', 'desc')->get();
+        $teams = Team::where('parent_id', 0)->with('owner')->with('members')->orderBy('id', 'desc')->get();
 
         return view('admin.teams.index', compact('teams'));
     }
