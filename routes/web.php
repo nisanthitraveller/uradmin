@@ -32,7 +32,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('teams/members/{teamId}', 'TeamController@members')->name('teams.members');
     Route::get('vomeetings', 'TeamController@vomeetings')->name('teams.vomeetings');
     Route::get('meetings', 'TeamController@meetings')->name('teams.meetings');
-    Route::post('meetings', 'TeamController@massFeed')->name('teams.massFeed');
+    Route::post('massFeed', 'TeamController@massFeed')->name('teams.massFeed');
+    Route::post('massList', 'TeamController@massList')->name('teams.massList');
     Route::resource('teams', 'TeamController');
     
     Route::delete('tiles/destroy', 'TilesController@massDestroy')->name('tiles.massDestroy');

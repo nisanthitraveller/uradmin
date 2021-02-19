@@ -87,6 +87,13 @@ class TeamController extends Controller
         return response(null, 204);
     }
     
+    public function massList()
+    {
+        Team::whereIn('id', request('ids'))->update(['list' => 1]);
+
+        return response(null, 204);
+    }
+    
     public function members($teamId)
     {
         //abort_unless(\Gate::allows('team_members'), 403);

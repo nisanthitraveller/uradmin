@@ -43,6 +43,10 @@
                 <textarea class="ckeditor" name="about">{{ old('about', isset($team) ? $team->about : '') }}</textarea>
             </div>
             <div class="form-group">
+                <label>Listing enabled</label>
+                <input type="text" name="list" class="form-control" value="{{ old('list', isset($team) ? $team->list : 0) }}">
+            </div>
+            <div class="form-group">
                 <label for="space_type_id">Space type</label>
                 <?php $spaceTypes = \Illuminate\Support\Facades\DB::table('space_types')->where('status', 1)->get(); ?>
                 <select name="space_type_id" class="form-control">
