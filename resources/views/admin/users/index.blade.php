@@ -41,6 +41,9 @@
                         <th width="370">
                             Remarks
                         </th>
+                        <th width="370">
+                            Card
+                        </th>
                         <th width="70">
                             &nbsp;
                         </th>
@@ -89,6 +92,9 @@
                             </td>
                             <td>
                                 {{ $user->remarks ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->card_brand ? 'Card shared' : 'No card' }}
                             </td>
                             <td>
                                 @can('user_show')
