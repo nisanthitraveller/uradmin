@@ -120,6 +120,11 @@
 
                         </tr>
                     @endforeach
+                    @if(!empty($users))
+                        <div class="col-12 text-center load-more">
+                            {!! $users->onEachSide(1)->links() !!}
+                        </div>
+                    @endif
                 </tbody>
             </table>
         </div>

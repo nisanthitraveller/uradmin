@@ -16,7 +16,8 @@ class UsersController extends Controller
     {
         abort_unless(\Gate::allows('user_access'), 403);
 
-        $users = User::orderBy('id', 'desc')->get();
+        $users = User::orderBy('id', 'desc');
+        $users = $users->paginate(100);
 
         return view('admin.users.index', compact('users'));
     }
